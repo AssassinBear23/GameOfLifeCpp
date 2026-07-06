@@ -6,8 +6,6 @@ cmake_minimum_required (VERSION 3.10)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_TOOLCHAIN_FILE "C:\\Users\\beerh\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake")
-
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
@@ -19,10 +17,16 @@ project ("GameOfLife")
 # ================================
 # Get all dependencies 
 # ================================
-find_package(imgui CONFIG REQUIRED)
+find_package(imgui REQUIRED)
+find_package(glad REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
+find_package(stb REQUIRED)
 
 # Add source to this project's executable.
-add_executable (GameOfLife "GameOfLife.cpp" "GameOfLife.h")
+add_executable (GameOfLife "GameOfLife.cpp")
+
+target_link_libraries(GameOfLife PRIVATE imgui)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET GameOfLife PROPERTY CXX_STANDARD 20)
