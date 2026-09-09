@@ -24,7 +24,7 @@ find_package(glm REQUIRED)
 find_package(stb REQUIRED)
 
 # Add source to this project's executable.
-add_executable (GameOfLife "GameOfLife.cpp")
+add_executable (GameOfLife "main.cpp")
 
 target_link_libraries(GameOfLife PRIVATE
     imgui::imgui

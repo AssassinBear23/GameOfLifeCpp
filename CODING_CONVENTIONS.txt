@@ -1,0 +1,96 @@
+C++ CODING CONVENTIONS — GameOfLifeC++
+
+Purpose
+- Provide a concise, consistent set of rules for C++20 source in this repository.
+- Keep code readable, maintainable, and modern-C++ idiomatic.
+
+Scope
+- Applies to all C++ (.cpp, .cxx, .h, .hpp) in this project.
+
+Formatting
+- Indent with 4 spaces. No tabs.
+- Maximum line length: 100 characters; prefer shorter where helpful.
+- Use UTF-8 without BOM.
+- Use Allman brace style:
+  if (cond) 
+  {
+      statement;
+  } else {
+      statement;
+  }
+- One space after commas, around binary operators, none before commas.
+- Blank line between logical sections in a function and between function definitions.
+
+Naming Conventions
+- Variables need to be clear in what they are used for.
+- Methods name depict a action: Get..., Set..., Activate..., etc
+- Class:        PascalCase
+  private var:  private m_variableName  ->  m_ prefix + camelCase
+  public var:   public VariableName     ->  PascalCase.
+  Methods:      PascalCase
+
+- Variables
+  bool:         is...                   -> a question that can be answered yes/no or true/false
+
+Filenames
+- Use camelcase for file names: `gameOfLife.cpp`, `grid.h`.
+- Folders use camelcase, preferring single word names.
+- Headers: `.h` for public headers, `.hpp` allowed for header-only modules.
+- Source files match header name: `grid.h` -> `grid.cpp`.
+
+Headers and Includes
+- Use `#pragma once` in headers.
+- Include order (each group separated by one blank line):
+  1. Corresponding header (if in .cpp)
+  2. Standard library headers
+  3. Third-party headers
+  4. Project headers
+- Prefer forward declarations in headers instead of including headers when possible.
+- Keep header files minimal: include only what is necessary.
+
+Naming
+- Types (classes, structs, enums): PascalCase (e.g., `Grid`, `CellState`).
+- Functions and methods: snake_case (e.g., `next_generation()`, `set_cell()`).
+- Variables: snake_case for local and function-scope variables (e.g., `row_count`).
+- Member variables: trailing underscore for non-static private members (e.g., `width_`).
+- Constants: `kCamelCase` (e.g., `kDefaultWidth`) or `ALL_CAPS` for compile-time macros only.
+- Template parameters: `T`, `TValue`, `TPolicy` for simple cases.
+- Avoid Hungarian notation and single-letter names except for common iterators (`i`, `j`, `it`).
+
+Classes and Structs
+- Prefer `class` for types with invariants; `struct` for passive aggregates.
+- Keep classes small and focused; favor composition over inheritance.
+- Mark constructors `explicit` when taking a single parameter.
+- Rule of zero preferred; if resource management is needed, prefer smart pointers and RAII.
+
+Functions and Methods
+- Prefer free functions in the same namespace where appropriate (non-member non-friend).
+- Mark overridden virtual functions with `override`.
+- Use `final` for classes or virtual functions that must not be overridden further.
+- Prefer `noexcept` for functions that do not throw.
+- Prefer returning by value and rely on RVO/move semantics; use references/pointers only when necessary.
+
+Modern C++ Practices
+- Prefer `std::unique_ptr`, `std::shared_ptr` only when ownership semantics justify it.
+- Prefer `std::array`, `std::vector`, `std::string_view` and other standard containers/views.
+- Use `constexpr` for compile-time constants and functions when possible.
+- Prefer structured bindings, ranged-for, and algorithms (`<algorithm>`) over manual loops when clearer.
+- Use `auto` when the type is obvious or verbose; avoid `auto` for basic types where type clarity is preferred.
+
+Error Handling and Assertions
+- Use exceptions for recoverable errors; prefer typed exceptions.
+- Use `assert()` for invariants that should never fail in production.
+- Validate public API inputs and return error codes or throw exceptions as per API contract.
+
+Concurrency
+- Prefer `std::thread`, `std::mutex`, `std::lock_guard`, `std::atomic` for portability.
+- Encapsulate synchronization inside classes; minimize shared mutable state.
+
+Documentation and Comments
+- Use doc comments for public APIs (brief summary, parameters, return).
+- Keep comments focused on why, not what.
+- Keep README updated with build and run instructions.
+
+Review and Evolution
+- These rules are a starting point. We'll iterate based on team/project needs.
+- When in doubt, prefer clarity and safety.
